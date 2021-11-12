@@ -15,3 +15,7 @@ Sigma is a clothing outlet which have many branches across the country. They wan
 2) UI(User Interface)
 
 # THE DATABASE WILL BE DEVELOPED ON PostgreSQL.
+
+# ER(Entity Relation) Diagram
+
+![Screenshot (21)](https://user-images.githubusercontent.com/44269268/141415989-1ff8af57-c528-4a2b-b29a-33d0b2e637f5.png)
