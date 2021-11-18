@@ -43,7 +43,6 @@ CREATE TABLE membership
 	membership_id SERIAL PRIMARY KEY,
 	customer_id INTEGER NOT NULL REFERENCES customer(customer_id),
 	membership_tag INTEGER NOT NULL REFERENCES membership_details(membership_tag),
-	membership_type VARCHAR(50) NOT NULL UNIQUE,
 	membership_start_date DATE NOT NULL,
 	membership_end_date DATE NOT NULL
 );
