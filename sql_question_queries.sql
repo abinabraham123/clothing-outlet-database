@@ -65,3 +65,28 @@ ON m.membership_tag = md.membership_tag
 WHERE
 md.membership_type IN ('Silver', 'Gold', 'Platinum', 'Diamond') AND c.date_of_birth BETWEEN '1980-01-01' AND '2000-01-01' and a.country != 'Japan';
 
+--8) Display Customer ID, name, city, country, membership_type(if they have any)--
+
+SELECT c.customer_id, CONCAT(c.first_name, ' ', c.last_name) AS full_name, a.city, a.country, md.membership_type FROM customer AS c
+INNER JOIN address AS a
+ON c.customer_id = a.customer_id
+FULL OUTER JOIN membership as m
+ON a.customer_id = m.customer_id
+FULL OUTER JOIN membership_details as md
+ON m.membership_tag = md.membership_tag;
+
+--9) Display count of each memberships--
+
+SELECT COUNT(m.membership_tag), md.membership_type FROM membership AS m
+INNER JOIN membership_details AS md
+ON m.membership_tag = md.membership_tag
+GROUP BY md.membership_type
+
+--10) Display membership with highest enrollment--
+
+SELECT COUNT(m.membership_tag), md.membership_type FROM membership AS m
+INNER JOIN membership_details AS md
+ON m.membership_tag = md.membership_tag
+GROUP BY md.membership_type
+ORDER BY COUNT(m.membership_tag) DESC
+LIMIT 1
