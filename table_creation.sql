@@ -75,8 +75,7 @@ CREATE TABLE inventory
 CREATE TABLE bill
 (
 	bill_number SERIAL PRIMARY KEY,
-	product_name VARCHAR(50) NOT NULL,
-	product_id INTEGER NOT NULL REFERENCES inventory(product_id),
+	product_name VARCHAR(5000) NOT NULL,
 	customer_id INTEGER NOT NULL REFERENCES customer(customer_id),
 	bill_date DATE NOT NULL,
 	bill_amount INTEGER NOT NULL
