@@ -49,3 +49,19 @@ INNER JOIN membership_details AS md
 ON m.membership_tag = md.membership_tag
 WHERE
 md.membership_type IN ('Gold', 'Platinum', 'Diamond') AND c.date_of_birth BETWEEN '1980-01-01' AND '2000-01-01';
+
+--7) A special offer is announced for Silver, Gold, Platinum and Diamond membership customers who are born between 1980 and 2000--
+--Customers from Japan wont get this offer--
+--email and mobile no. of customers is required to contact them--
+--Display customer_id, full_name, phone, email, date_of_birth, country membership type of customers who belongs to above mentioned criteria--
+
+SELECT c.customer_id, CONCAT(c.first_name, ' ', c.last_name) AS full_name, c.mobile, c.email, c.date_of_birth, a.country, md.membership_type FROM customer as c
+INNER JOIN address AS a
+ON c.customer_id = a.customer_id
+INNER JOIN membership AS m
+ON a.customer_id = m.customer_id
+INNER JOIN membership_details AS md 
+ON m.membership_tag = md.membership_tag
+WHERE
+md.membership_type IN ('Silver', 'Gold', 'Platinum', 'Diamond') AND c.date_of_birth BETWEEN '1980-01-01' AND '2000-01-01' and a.country != 'Japan';
+
