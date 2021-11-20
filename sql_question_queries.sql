@@ -123,3 +123,36 @@ UPDATE customer
 SET mobile = '986839775'
 WHERE
 mobile = '91091231'
+
+--12) Display customer ID, full name, bill amount and the bill date of the customers who have spend more than the average bill on a single spending--
+
+SELECT c.customer_id, CONCAT(c.first_name, ' ', c.last_name) AS full_name, b.bill_amount, b.bill_date FROM customer as c
+INNER JOIN bill AS b
+ON c.customer_id = b.customer_id
+WHERE bill_amount >= (SELECT AVG(bill_amount) FROM bill)
+
+--13) Display number of times a customer have spend more than the average bill amount--
+
+SELECT c.customer_id, CONCAT(c.first_name, ' ', c.last_name) AS full_name, COUNT(b.bill_amount) FROM customer as c
+INNER JOIN bill AS b
+ON c.customer_id = b.customer_id
+WHERE bill_amount >= (SELECT AVG(bill_amount) FROM bill)
+GROUP BY c.customer_id
+ORDER BY COUNT(b.bill_amount) DESC
+
+--13) Display customer id, full name, total_spend of customers who have spend more than 5000--
+
+SELECT c.customer_id, CONCAT(c.first_name, ' ', c.last_name) AS full_name, SUM(b.bill_amount) AS total_spend FROM customer as c
+INNER JOIN bill AS b
+ON c.customer_id = b.customer_id
+GROUP BY c.customer_id
+HAVING SUM(bill_amount) >= 6000
+ORDER BY SUM(b.bill_amount) DESC
+
+--14) Display customer id, full name, total_spend of the customer who spend the lowest--
+
+SELECT c.customer_id, CONCAT(c.first_name, ' ', c.last_name) AS full_name, SUM(b.bill_amount) FROM customer as c
+INNER JOIN bill AS b
+ON c.customer_id = b.customer_id
+GROUP BY c.customer_id
+HAVING SUM(bill_amount) = (SELECT MIN(bill_amount) FROM bill)
