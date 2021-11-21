@@ -156,3 +156,48 @@ INNER JOIN bill AS b
 ON c.customer_id = b.customer_id
 GROUP BY c.customer_id
 HAVING SUM(bill_amount) = (SELECT MIN(bill_amount) FROM bill)
+
+--15) Display Unique brands--
+
+SELECT DISTINCT(brand) FROM inventory
+
+--16) Display product type with highest price--
+
+SELECT product_id, product_name, brand, type, price FROM inventory
+GROUP BY product_id
+ORDER BY price DESC
+LIMIT 1
+
+--16) Display the brand and how many products they have--
+
+SELECT brand, COUNT(*) as no_of_products FROM inventory
+GROUP BY brand
+ORDER BY COUNT(*)
+
+--17) A customer wants to buy shirts and pants, what are his options--
+
+SELECT product_name, brand, type, price FROM inventory
+WHERE type IN('Shirt', 'Pants')
+
+--18) Display ongoing discount--
+
+SELECT discount_info FROM discount
+WHERE status IN ('Ongoing')
+
+--19) Display discount info of Gold membership(expired included)--
+
+SELECT d.discount_info, m.membership_type FROM discount AS d
+INNER JOIN membership_details AS m
+ON d.membership_tag = m.membership_tag
+WHERE m.membership_type IN ('Gold')
+
+--20) A customer provided his mobile no., he wants to know what type of discount he can avail--
+
+SELECT CONCAT(c.first_name, ' ', c.last_name) AS full_name, c.mobile, d.discount_info, md.membership_type FROM discount AS d
+INNER JOIN membership_details AS md
+ON d.membership_tag = md.membership_tag
+INNER JOIN membership AS m
+ON md.membership_tag = m.membership_tag
+INNER JOIN customer as c
+ON m.customer_id = c.customer_id
+WHERE c.mobile = '23719081' and d.status = 'Ongoing'
