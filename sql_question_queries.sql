@@ -210,7 +210,7 @@ WHERE customer.city <> salesman.city
 AND orders.customer_id = customer.customer_id
 AND orders.salesman_id = salesman.salesman_id;
 
---21) Prevent SQL Injection statements and increase security>
+--22) Prevent SQL Injection statements and increase security>
 
 OR 'a'='a'
 
