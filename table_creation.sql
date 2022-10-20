@@ -80,3 +80,25 @@ CREATE TABLE bill
 	bill_date DATE NOT NULL,
 	bill_amount INTEGER NOT NULL
 );
+
+--9) CREATING WAREHOUSE TABLE--
+CREATE TABLE warehouse
+(
+        product_id INTEGER PRIMARY KEY,
+        product_name VARCHAR(5000) NOT NULL,
+        brand VARCHAR(50) NOT NULL,
+        import_date DATE NOT NULL,
+        price INTEGER NOT NULL
+);
+
+--10) CREATING Subscription TABLE--
+CREATE TABLE subscription
+(
+        customer_id SERIAL PRIMARY KEY,
+        email VARCHAR(50) UNIQUE NOT NULL,
+        due_date DATE NOT NULL,
+	renewal_date DATE NOT NULL,
+	sub_amount INTEGER NOT NULL,
+	cancel_sub BOOLEAN,
+	addons_ifexists VARCHAR(200) NOT NULL
+);

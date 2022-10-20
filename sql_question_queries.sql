@@ -201,3 +201,43 @@ ON md.membership_tag = m.membership_tag
 INNER JOIN customer as c
 ON m.customer_id = c.customer_id
 WHERE c.mobile = '23719081' and d.status = 'Ongoing'
+
+--21) find those customers that live in a different city than the salesmen's>.
+
+SELECT ord_no, cust_name, orders.customer_id, orders.salesman_id
+FROM salesman, customer, orders
+WHERE customer.city <> salesman.city
+AND orders.customer_id = customer.customer_id
+AND orders.salesman_id = salesman.salesman_id;
+
+--21) Prevent SQL Injection statements and increase security>
+
+OR 'a'='a'
+
+' or "
+
+-- or # 
+
+' OR '1
+
+' OR 1 -- -
+
+" OR "" = "
+
+" OR 1 = 1 -- -
+
+' OR '' = '
+
+'='
+
+'LIKE'
+
+'=0--+
+
+ OR 1=1
+
+' OR 'x'='x
+
+' AND id IS NULL; --
+
+'''''''''''''UNION SELECT '2
